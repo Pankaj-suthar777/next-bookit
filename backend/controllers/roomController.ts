@@ -18,8 +18,6 @@ export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
     queryStr[key] = value;
   });
 
-  const roomsCount = await Room.countDocuments();
-
   const apiFilters = new APIFilters(Room, queryStr).search().filter();
 
   let rooms: IRoom[] = await apiFilters.query;
@@ -32,7 +30,6 @@ export const allRooms = catchAsyncErrors(async (req: NextRequest) => {
     success: true,
     filteredRoomCount,
     rooms,
-    roomsCount,
     resPerPage,
   });
 });
