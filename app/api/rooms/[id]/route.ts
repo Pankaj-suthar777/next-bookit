@@ -1,14 +1,18 @@
 import { NextRequest } from "next/server";
 import { createEdgeRouter } from "next-connect";
-import { allRooms } from "@/backend/controllers/roomController";
+import { getRoomDetails } from "@/backend/controllers/roomController";
 import dbConnect from "@/backend/config/dbConfig";
 
-interface RequestContext {}
+interface RequestContext {
+  params: {
+    id: string;
+  };
+}
 const router = createEdgeRouter<NextRequest, RequestContext>();
 
 dbConnect();
 
-router.get(allRooms);
+router.get(getRoomDetails);
 
 export async function GET(requset: NextRequest, ctx: RequestContext) {
   dbConnect();

@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { createEdgeRouter } from "next-connect";
-import { allRooms } from "@/backend/controllers/roomController";
+import { newRoom } from "@/backend/controllers/roomController";
 import dbConnect from "@/backend/config/dbConfig";
 
 interface RequestContext {}
@@ -8,9 +8,8 @@ const router = createEdgeRouter<NextRequest, RequestContext>();
 
 dbConnect();
 
-router.get(allRooms);
+router.post(newRoom);
 
-export async function GET(requset: NextRequest, ctx: RequestContext) {
-  dbConnect();
+export async function POST(requset: NextRequest, ctx: RequestContext) {
   return router.run(requset, ctx);
 }

@@ -52,7 +52,7 @@ const roomSchema: Schema = new Schema({
   },
   description: {
     type: String,
-    required: [true, "Please enter room name"],
+    required: [true, "Please enter room description"],
   },
   pricePerNight: {
     type: Number,
@@ -154,7 +154,7 @@ const roomSchema: Schema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: false,
+    //  required: false,
   },
   createdAt: {
     type: Date,
