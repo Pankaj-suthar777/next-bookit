@@ -10,10 +10,12 @@
     "seeder": "tsc seeder/seeder.ts --outDir .temp && node .temp/seeder/seeder.js && rm -rf .temp"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
     "mongoose": "^8.3.4",
     "next": "14.2.3",
+    "next-auth": "^4.24.7",
     "next-connect": "^1.0.0",
     "react": "^18",
     "react-bootstrap": "^2.10.2",
@@ -23,6 +25,7 @@
     "react-star-ratings": "^2.3.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
