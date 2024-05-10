@@ -22,6 +22,11 @@ export const catchAsyncErrors =
         error.statusCode = 400;
       }
 
+      // mongoose duplicate key error
+      if (error.code === 1100) {
+        error.message = `Duplicate ${Object.keys(error.keyValue)} entered`;
+      }
+
       return NextResponse.json(
         {
           errMessage: error.message,

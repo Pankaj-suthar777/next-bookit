@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors";
 import User from "../models/user";
+import ErrorHandler from "../utils/errorHandler";
 
 // register user => /api/auth/register
 export const registerUser = catchAsyncErrors(async (req: NextRequest) => {
   const body = await req.json();
   const { name, email, password } = body;
-
-  const newUser = User.create({ name, email, password });
-
+  console.log("newUser", body);
+  await User.create({ name, email, password });
   return NextResponse.json({
     success: true,
   });
@@ -31,25 +31,25 @@ export const updateProfile = catchAsyncErrors(async (req: NextRequest) => {
   });
 });
 
-// // Update password  =>  /api/me/update_password
-// export const updatePassword = catchAsyncErrors(async (req: NextRequest) => {
-//   const body = await req.json();
+// Update password  =>  /api/me/update_password
+export const updatePassword = catchAsyncErrors(async (req: NextRequest) => {
+  const body = await req.json();
 
-//   const user = await User.findById(req?.user?._id).select("+password");
+  const user = await User.findById(req?.user?._id).select("+password");
 
-//   const isMatched = await user.comparePassword(body.oldPassword);
+  const isMatched = await user.comparePassword(body.oldPassword);
 
-//   if (!isMatched) {
-//     throw new ErrorHandler("Old password is incorrect", 400);
-//   }
+  if (!isMatched) {
+    throw new ErrorHandler("Old password is incorrect", 400);
+  }
 
-//   user.password = body.password;
-//   await user.save();
+  user.password = body.password;
+  await user.save();
 
-//   return NextResponse.json({
-//     success: true,
-//   });
-// });
+  return NextResponse.json({
+    success: true,
+  });
+});
 
 // // Upload user avatar  =>  /api/me/upload_avatar
 // export const uploadAvatar = catchAsyncErrors(async (req: NextRequest) => {

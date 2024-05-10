@@ -1,6 +1,6 @@
 "use client";
 import { useRegisterMutation } from "@/redux/api/authApi";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React, {
   ChangeEventHandler,
   FormEvent,
@@ -18,6 +18,7 @@ const Register = () => {
   });
 
   const { password, email, name } = user;
+  console.log(password);
 
   const router = useRouter();
 
@@ -25,7 +26,7 @@ const Register = () => {
 
   useEffect(() => {
     if (error && "data" in error) {
-      toast.error(error?.data?.message);
+      toast.error(error?.data?.errMessage);
     }
 
     if (isSuccess) {
@@ -47,7 +48,7 @@ const Register = () => {
   };
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setUser({ ...user, [e.target.name]: [e.target.value] });
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   return (
@@ -92,10 +93,13 @@ const Register = () => {
               name="password"
               value={password}
               onChange={onChange}
-              disabled={isLoading}
             />
           </div>
-          <button type="submit" className="btn form-btn w-100 py-2">
+          <button
+            type="submit"
+            className="btn form-btn w-100 py-2"
+            disabled={isLoading}
+          >
             {isLoading ? <ButtonLoader /> : "Register"}
           </button>
         </form>
