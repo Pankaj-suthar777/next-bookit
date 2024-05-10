@@ -1,8 +1,8 @@
+import dbConnect from "@/backend/config/dbConfig";
+import User, { IUser } from "@/backend/models/user";
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import dbConnect from "@/backend/config/dbConfig";
-import User, { IUser } from "@/backend/models/user";
 import bcrypt from "bcryptjs";
 
 type Credentials = {
@@ -20,12 +20,13 @@ async function auth(req: NextApiRequest, res: NextApiResponse) {
         // @ts-ignore
         async authorize(credentials: Credentials) {
           dbConnect();
+
           const { email, password } = credentials;
 
-          const user = await User.find({ email }).select("+password");
+          const user = await User.findOne({ email }).select("+password");
 
           if (!user) {
-            throw new Error("Invalid email");
+            throw new Error("Invalid email or password");
           }
 
           const isPasswordMatched = await bcrypt.compare(
@@ -36,16 +37,25 @@ async function auth(req: NextApiRequest, res: NextApiResponse) {
           if (!isPasswordMatched) {
             throw new Error("Invalid email or password");
           }
+
+          return user;
         },
       }),
     ],
     callbacks: {
       jwt: async ({ token, user }) => {
         user && (token.user = user);
+
+        // TODO - update session when user is updated
+
         return token;
       },
       session: async ({ session, token }) => {
         session.user = token.user as IUser;
+
+        //@ts-ignore
+        delete session?.user?.password;
+
         return session;
       },
     },
