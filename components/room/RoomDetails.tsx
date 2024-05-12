@@ -7,36 +7,37 @@ import RoomFeatures from "./RoomFeatures";
 import BookingDatePicker from "./BookingDatePicker";
 import NewReview from "../review/NewReview";
 import ListReviews from "../review/ListReviews";
-import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
-import "mapbox-gl/dist/mapbox-gl.css";
+// i don't have api key
+//import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
+//import "mapbox-gl/dist/mapbox-gl.css";
 
 interface Props {
   data: {
     room: IRoom;
   };
 }
-
-mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
+//  i don't have api key
+// mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
 
 const RoomDetails = ({ data }: Props) => {
   const { room } = data;
+  // i don't have api key
+  // useEffect(() => {
+  //   const setMap = () => {
+  //     const coordinates = room?.location.coordinates;
 
-  useEffect(() => {
-    const setMap = () => {
-      const coordinates = room?.location.coordinates;
+  //     const map = new mapboxgl({
+  //       conatiner: "job-map",
+  //       style: "mapbox://styles/mapbox.streets-v11",
+  //       center: coordinates,
+  //       zoom: 12,
+  //     });
 
-      const map = new mapboxgl({
-        conatiner: "job-map",
-        style: "mapbox://styles/mapbox.streets-v11",
-        center: coordinates,
-        zoom: 12,
-      });
-
-      // Add marker to the map
-      new mapboxgl.Marker().setLngLat(coordinates).addTo(map);
-    };
-    setMap();
-  }, []);
+  //     // Add marker to the map
+  //     new mapboxgl.Marker().setLngLat(coordinates).addTo(map);
+  //   };
+  //   setMap();
+  // }, []);
 
   return (
     <div className="container container-fluid">
@@ -62,7 +63,9 @@ const RoomDetails = ({ data }: Props) => {
         </div>
         <div className="col-12 col-md-6 col-lg-4">
           <BookingDatePicker room={room} />
-          {room?.location && (
+
+          {/* i don't have api key */}
+          {/* {room?.location && (
             <div className="my-5">
               <h4 className="my2">Room Location:</h4>
               <div
@@ -71,7 +74,7 @@ const RoomDetails = ({ data }: Props) => {
                 style={{ height: 350, width: "100%" }}
               ></div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
       <NewReview />
