@@ -19,10 +19,10 @@ const UpdateProfile = () => {
 
   const { user: currentUser } = useAppSelector((state) => state.auth);
 
-  const [updateSession, { data }] = useLazyUpdateSessionQuery();
   const [updateProfile, { isLoading, isSuccess, error }] =
     useUpdateProfileMutation();
 
+  const [updateSession, { data }] = useLazyUpdateSessionQuery();
   if (data) dispatch(setUser(data?.user));
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const UpdateProfile = () => {
     if (isSuccess) {
       //@ts-ignore
       updateSession();
-
+      toast.success("profile updated");
       router.refresh();
     }
   }, [currentUser, error, isSuccess]);

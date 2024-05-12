@@ -3,7 +3,7 @@ import Room, { IRoom } from "../models/room";
 import dbConnect from "../config/dbConfig";
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors";
 import ErrorHandler from "../utils/errorHandler";
-import APIFilters from "../apiFilters";
+import APIFilters from "../utils/apiFilters";
 
 dbConnect();
 
