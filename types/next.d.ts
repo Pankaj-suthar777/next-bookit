@@ -13,3 +13,6 @@ declare module "@reduxjs/toolkit/query/react" {
     data: any;
   }
 }
+
+declare module "moment-range";
+declare module "moment";

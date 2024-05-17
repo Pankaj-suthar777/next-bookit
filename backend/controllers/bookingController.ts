@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors";
 import Booking, { IBooking } from "../models/booking";
+import Moment from "moment";
+import { extendMoment } from "moment-range";
+import ErrorHandler from "../utils/errorHandler";
+
+//@ts-ignore
+const moment = extendMoment(Moment);
 
 // Create new Booking   =>  /api/bookings
 export const newBooking = catchAsyncErrors(async (req: NextRequest) => {
@@ -56,6 +62,52 @@ export const checkRoomBookingAvailability = catchAsyncErrors(
 
     return NextResponse.json({
       isAvailable,
+    });
+  }
+);
+
+// Get room booked dates   =>  /api/bookings/get_booked_dates
+export const getRoomBookedDates = catchAsyncErrors(async (req: NextRequest) => {
+  const { searchParams } = new URL(req.url);
+  const roomId = searchParams.get("roomId");
+
+  const bookings = await Booking.find({ room: roomId });
+
+  const bookedDates = bookings.flatMap((booking) =>
+    Array.from(
+      moment //@ts-ignore
+        .range(moment(booking.checkInDate), moment(booking.checkOutDate))
+        .by("day")
+    )
+  );
+
+  return NextResponse.json({
+    bookedDates,
+  });
+});
+
+// Get current user bookings   =>  /api/bookings/me
+export const myBookings = catchAsyncErrors(async (req: NextRequest) => {
+  const bookings = await Booking.find({ user: req.user._id });
+
+  return NextResponse.json({
+    bookings,
+  });
+});
+
+// Get booking details   =>  /api/bookings/:id
+export const getBookingDetails = catchAsyncErrors(
+  async (req: NextRequest, { params }: { params: { id: string } }) => {
+    const booking = await Booking.findById(params.id)
+      .populate("user")
+      .populate("room");
+
+    if (booking.user?._id?.toString() !== req.user._id) {
+      throw new ErrorHandler("You can not view this booking", 403);
+    }
+
+    return NextResponse.json({
+      booking,
     });
   }
 );

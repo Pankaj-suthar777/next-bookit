@@ -2,8 +2,13 @@
 
 import { IRoom } from "@/backend/models/room";
 import { calculateDaysOfStay } from "@/helpers/helper";
-import { useNewBookingMutation } from "@/redux/api/bookingApi";
+import {
+  useGetBookedDatesQuery,
+  useLazyCheckBookingAvailabilityQuery,
+  useNewBookingMutation,
+} from "@/redux/api/bookingApi";
 import { useState } from "react";
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -18,16 +23,32 @@ const BookingDatePicker = ({ room }: Props) => {
 
   const [newBooking] = useNewBookingMutation();
 
-  const onChange = (dates: Date[]) => {
+  const [checkBookingAvailability, { data }] =
+    useLazyCheckBookingAvailabilityQuery();
+
+  const isAvailable = data?.isAvailable;
+
+  const { data: { bookedDates: dates } = {} } = useGetBookedDatesQuery(
+    room._id
+  );
+  const excludeDates = dates?.map((date: string) => new Date(date)) || [];
+
+  const onChange = async (dates: Date[]) => {
     const [checkInDate, checkOutDate] = dates;
     setCheckInDate(checkInDate);
     setCheckOutDate(checkOutDate);
 
     if (checkInDate && checkOutDate) {
-      // check booking avaibility
       const days = calculateDaysOfStay(checkInDate, checkOutDate);
 
       setDaysOfStay(days);
+
+      // check booking availability
+      checkBookingAvailability({
+        id: room._id,
+        checkInDate: checkInDate.toISOString(),
+        checkOutDate: checkOutDate.toISOString(),
+      });
     }
   };
 
@@ -60,9 +81,22 @@ const BookingDatePicker = ({ room }: Props) => {
         startDate={checkInDate}
         endDate={checkOutDate}
         minDate={new Date()}
+        excludeDates={excludeDates}
         selectsRange
         inline
       />
+
+      {isAvailable === true && (
+        <div className="alert alert-success my-3">
+          Room is available. Book now.
+        </div>
+      )}
+      {isAvailable === false && (
+        <div className="alert alert-danger my-3">
+          Room not available. Try different dates.
+        </div>
+      )}
+
       <button className="btn py-3 form-btn w-100" onClick={bookRoom}>
         Pay
       </button>
