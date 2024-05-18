@@ -1,9 +1,9 @@
 import Error from "@/app/error";
 import { getAuthHeader } from "@/helpers/authHeader";
 import React from "react";
-import BookingDetails from "../../../components/booking/BookingDetails";
+import Invoice from "@/components/invoice/Invoice";
 export const metadata = {
-  title: "My Bookings Details",
+  title: "Bookings Invoice",
 };
 
 const getBookings = async (id: string) => {
@@ -22,11 +22,10 @@ const BookingDetailsPage = async ({
   };
 }) => {
   const data = await getBookings(params.id);
-  console.log(data);
   if (data?.errMessage) {
     return <Error error={data} />;
   }
-  return <BookingDetails data={data} />;
+  return <Invoice data={data} />;
 };
 
 export default BookingDetailsPage;

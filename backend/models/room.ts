@@ -163,20 +163,20 @@ const roomSchema: Schema<IRoom> = new Schema({
   },
 });
 
-// Setting up location
-roomSchema.pre("save", async function (next) {
-  // i don't have api key
-  // const loc = await geoCoder.geocode(this.address);
-  // this.location = {
-  //   type: "Point",
-  //   coordinates: [loc[0].longitude, loc[0].latitude],
-  //   formattedAddress: loc[0].formattedAddress,
-  //   city: loc[0].city,
-  //   state: loc[0].state,
-  //   zipCode: loc[0].zipcode,
-  //   country: loc[0].countryCode,
-  // };
-});
+// // Setting up location
+// roomSchema.pre("save", async function (next) {
+//   // i don't have api key
+//   // const loc = await geoCoder.geocode(this.address);
+//   // this.location = {
+//   //   type: "Point",
+//   //   coordinates: [loc[0].longitude, loc[0].latitude],
+//   //   formattedAddress: loc[0].formattedAddress,
+//   //   city: loc[0].city,
+//   //   state: loc[0].state,
+//   //   zipCode: loc[0].zipcode,
+//   //   country: loc[0].countryCode,
+//   // };
+// });
 
-export default mongoose.models.Room ||
+export default mongoose.models?.Room ||
   mongoose.model<IRoom>("Room", roomSchema);

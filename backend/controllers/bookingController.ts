@@ -4,6 +4,7 @@ import Booking, { IBooking } from "../models/booking";
 import Moment from "moment";
 import { extendMoment } from "moment-range";
 import ErrorHandler from "../utils/errorHandler";
+import Room from "../models/room";
 
 //@ts-ignore
 const moment = extendMoment(Moment);
@@ -80,6 +81,7 @@ export const getRoomBookedDates = catchAsyncErrors(async (req: NextRequest) => {
         .by("day")
     )
   );
+  console.log("bookedDates", bookedDates);
 
   return NextResponse.json({
     bookedDates,
@@ -98,16 +100,15 @@ export const myBookings = catchAsyncErrors(async (req: NextRequest) => {
 // Get booking details   =>  /api/bookings/:id
 export const getBookingDetails = catchAsyncErrors(
   async (req: NextRequest, { params }: { params: { id: string } }) => {
-    const booking = await Booking.findById(params.id)
-      .populate("user")
-      .populate("room");
-
-    if (booking.user?._id?.toString() !== req.user._id) {
+    const bookings = await Booking.findById(params.id).populate("user");
+    const roomDetails = await Room.findById(bookings.room);
+    bookings.room = roomDetails;
+    if (bookings.user?._id?.toString() !== req.user._id) {
       throw new ErrorHandler("You can not view this booking", 403);
     }
 
     return NextResponse.json({
-      booking,
+      bookings,
     });
   }
 );

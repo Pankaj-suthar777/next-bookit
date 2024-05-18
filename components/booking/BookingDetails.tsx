@@ -5,12 +5,12 @@ import React from "react";
 
 interface Props {
   data: {
-    booking: IBooking;
+    bookings: IBooking;
   };
 }
 
 const BookingDetails = ({ data }: Props) => {
-  const booking = data?.booking;
+  const booking = data?.bookings;
 
   const isPaid = booking?.paymentInfo?.status === "paid" ? true : false;
 

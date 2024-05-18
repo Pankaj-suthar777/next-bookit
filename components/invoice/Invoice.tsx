@@ -5,16 +5,17 @@ import React from "react";
 
 import "./Invoice.css";
 import html2canvas from "html2canvas";
+//@ts-ignore
 import jsPDF from "jspdf";
 
 interface Props {
   data: {
-    booking: IBooking;
+    bookings: IBooking;
   };
 }
 
 const Invoice = ({ data }: Props) => {
-  const booking = data?.booking;
+  const booking = data?.bookings;
 
   const handleDownload = () => {
     const input = document.getElementById("booking_invoice");
