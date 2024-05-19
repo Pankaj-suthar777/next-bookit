@@ -77,8 +77,8 @@ const RoomDetails = ({ data }: Props) => {
           )} */}
         </div>
       </div>
-      <NewReview />
-      <ListReviews />
+      <NewReview roomId={room._id} />
+      <ListReviews reviews={room.reviews} />
     </div>
   );
 };

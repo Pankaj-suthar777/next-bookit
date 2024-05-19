@@ -2,7 +2,9 @@ import Error from "../../error";
 import RoomDetails from "@/components/room/RoomDetails";
 
 const getRooms = async (id: string) => {
-  const res = await fetch(`${process.env.API_URL}/api/rooms/${id}`);
+  const res = await fetch(`${process.env.API_URL}/api/rooms/${id}`, {
+    cache: "no-cache",
+  });
   return res.json();
 };
 
