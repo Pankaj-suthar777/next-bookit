@@ -10,13 +10,13 @@ const ForgotPassword = () => {
   const [forgotPassword, { isLoading, isSuccess, error }] =
     useForgotPasswordMutation();
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const userData = {
       email,
     };
-    forgotPassword(userData);
+    await forgotPassword(userData);
   };
 
   useEffect(() => {

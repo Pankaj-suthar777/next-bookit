@@ -31,11 +31,8 @@ const NewPassword = ({ token }: Props) => {
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const userData = {
-      password,
-      confirmPassword,
-    };
-    resetPassword({ token, userData });
+    const passwords = { password, confirmPassword };
+    resetPassword({ token, body: passwords });
   };
 
   return (

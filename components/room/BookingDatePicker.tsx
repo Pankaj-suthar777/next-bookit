@@ -132,7 +132,7 @@ const BookingDatePicker = ({ room }: Props) => {
           onClick={bookRoom}
           disabled={isLoading}
         >
-          Pay = ${(daysOfStay ** room?.pricePerNight).toFixed(2)}
+          Pay = ${(daysOfStay * room?.pricePerNight).toFixed(2)}
         </button>
       )}
     </div>

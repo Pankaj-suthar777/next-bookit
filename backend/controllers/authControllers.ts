@@ -11,7 +11,7 @@ import crypto from "crypto";
 export const registerUser = catchAsyncErrors(async (req: NextRequest) => {
   const body = await req.json();
   const { name, email, password } = body;
-  console.log("newUser", body);
+
   await User.create({ name, email, password });
   return NextResponse.json({
     success: true,
@@ -89,12 +89,12 @@ export const forgotPassword = catchAsyncErrors(async (req: NextRequest) => {
 
   const resetToken = user.getResetPasswordToken();
 
+  await user.save();
+
   // create reset password url
 
   const resetUrl = `${process.env.API_URL}/password/reset/${resetToken}`;
-
-  const message = resetPasswordHTMLTemplate(user.username, resetUrl);
-
+  const message = resetPasswordHTMLTemplate(user.name, resetUrl);
   try {
     await sendEmail({
       email: user.email,
@@ -129,6 +129,7 @@ export const resetPassword = catchAsyncErrors(
       resetPasswordToken,
       resetPasswordExpire: { $gt: Date.now() },
     });
+
     if (!user) {
       throw new ErrorHandler(
         "Password reset token is invalid or has been expired",
