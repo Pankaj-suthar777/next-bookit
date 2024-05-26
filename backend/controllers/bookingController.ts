@@ -113,31 +113,6 @@ export const getBookingDetails = catchAsyncErrors(
   }
 );
 
-// Get sales stats   =>  /api/admin/sales_stats
-export const getSalesStats = catchAsyncErrors(async (req: NextRequest) => {
-  const { searchParams } = new URL(req.url);
-
-  const startDate = new Date(searchParams.get("startDate") as string);
-  const endDate = new Date(searchParams.get("endDate") as string);
-  startDate.setHours(0, 0, 0, 0);
-  endDate.setHours(23, 59, 59, 999);
-
-  const bookings = await Booking.find({
-    createdAt: { $gte: startDate, $lte: endDate },
-  });
-
-  const numberOfBookings = bookings.length;
-  const totalSales = bookings.reduce(
-    (acc, booking) => acc + booking.amountPaid,
-    0
-  );
-
-  return NextResponse.json({
-    numberOfBookings,
-    totalSales,
-  });
-});
-
 const getLastSixMonthsSales = async () => {
   const last6MonthsSales: any = [];
 
@@ -236,3 +211,33 @@ const getTopPerformingRooms = async (startDate: Date, endDate: Date) => {
 
   return topRooms;
 };
+
+// Get sales stats   =>  /api/admin/sales_stats
+export const getSalesStats = catchAsyncErrors(async (req: NextRequest) => {
+  const { searchParams } = new URL(req.url);
+
+  const startDate = new Date(searchParams.get("startDate") as string);
+  const endDate = new Date(searchParams.get("endDate") as string);
+  startDate.setHours(0, 0, 0, 0);
+  endDate.setHours(23, 59, 59, 999);
+
+  const bookings = await Booking.find({
+    createdAt: { $gte: startDate, $lte: endDate },
+  });
+
+  const numberOfBookings = bookings.length;
+  const totalSales = bookings.reduce(
+    (acc, booking) => acc + booking.amountPaid,
+    0
+  );
+
+  const sixMonthSalesData = await getLastSixMonthsSales();
+  const topRooms = await getTopPerformingRooms(startDate, endDate);
+
+  return NextResponse.json({
+    numberOfBookings,
+    totalSales,
+    sixMonthSalesData,
+    topRooms,
+  });
+});
