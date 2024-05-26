@@ -9,6 +9,7 @@ import { SalesChart } from "../charts/SalesCharts";
 import { useLazyGetSalesStatsQuery } from "@/redux/api/bookingApi";
 import { toast } from "react-hot-toast";
 import Loading from "@/app/admin/loading";
+import { TopPerformingChart } from "./TopPerformingChart";
 
 const Dashboard = () => {
   const [startDate, setStartDate] = useState(new Date());

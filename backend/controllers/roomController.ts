@@ -137,7 +137,7 @@ export const createRoomReview = catchAsyncErrors(async (req: NextRequest) => {
   });
 });
 
-// Get room details  =>  /api/reviews/can_review
+// Can review  =>  /api/reviews/can_review
 export const canReview = catchAsyncErrors(async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
   const roomId = searchParams.get("roomId");
