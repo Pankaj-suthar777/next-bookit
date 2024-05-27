@@ -54,15 +54,13 @@ const MyBooking = ({ data }: Props) => {
         actions: (
           <>
             <Link href={`/bookings/${booking._id}`} className="btn btn-primary">
-              {" "}
-              <i className="fa fa-eye"></i>{" "}
+              <i className="fa fa-eye"></i>
             </Link>
             <Link
               href={`/bookings/invoice/${booking._id}`}
               className="btn btn-success ms-2"
             >
-              {" "}
-              <i className="fa fa-receipt"></i>{" "}
+              <i className="fa fa-receipt"></i>
             </Link>
           </>
         ),

@@ -3,7 +3,7 @@
 import { IBooking } from "@/backend/models/booking";
 import React from "react";
 
-import "./Invoice.css";
+import "./invoice.css";
 import html2canvas from "html2canvas";
 //@ts-ignore
 import jsPDF from "jspdf";

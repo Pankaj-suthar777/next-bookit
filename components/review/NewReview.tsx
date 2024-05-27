@@ -97,6 +97,7 @@ const NewReview = ({ roomId }: { roomId: string }) => {
                 data-bs-dismiss="modal"
                 aria-label="Close"
                 onClick={() => submitHandler()}
+                disabled={isLoading}
               >
                 Submit
               </button>

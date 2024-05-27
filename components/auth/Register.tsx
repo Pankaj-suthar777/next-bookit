@@ -18,7 +18,6 @@ const Register = () => {
   });
 
   const { password, email, name } = user;
-  console.log(password);
 
   const router = useRouter();
 

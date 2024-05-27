@@ -1,13 +1,13 @@
 "use client";
 import { IRoom } from "@/backend/models/room";
-import React, { useEffect } from "react";
+import React from "react";
 import StarRatings from "react-star-ratings";
 import RoomImageSlider from "./RoomImageSlider";
 import RoomFeatures from "./RoomFeatures";
 import BookingDatePicker from "./BookingDatePicker";
 import NewReview from "../review/NewReview";
 import ListReviews from "../review/ListReviews";
-// i don't have api key
+// i don't have api key for map
 //import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
 //import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -16,12 +16,12 @@ interface Props {
     room: IRoom;
   };
 }
-//  i don't have api key
+//  i don't have api key for map
 // mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN;
 
 const RoomDetails = ({ data }: Props) => {
   const { room } = data;
-  // i don't have api key
+  // i don't have api key for map
   // useEffect(() => {
   //   const setMap = () => {
   //     const coordinates = room?.location.coordinates;

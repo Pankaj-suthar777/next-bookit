@@ -50,7 +50,7 @@ async function auth(req: NextApiRequest, res: NextApiResponse) {
       jwt: async ({ token, user }) => {
         user && (token.user = user);
 
-        // TODO - update session when user is updated
+        //update session when user is updated
         const jwtToken = token as Token;
         if (req.url?.includes("/api/auth/session?update")) {
           // Hit the database and return the updated user

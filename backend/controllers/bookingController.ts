@@ -190,8 +190,8 @@ const getTopPerformingRooms = async (startDate: Date, endDate: Date) => {
     {
       $lookup: {
         from: "rooms",
-        localField: "_id",
-        foreignField: "_id",
+        localField: "_id", //booking document
+        foreignField: "_id", //room document
         as: "roomData",
       },
     },
@@ -202,6 +202,7 @@ const getTopPerformingRooms = async (startDate: Date, endDate: Date) => {
     // Stage 7: Shape the output document (include or exclude the fields)
     {
       $project: {
+        // 0 to exclude, 1 to include
         _id: 0,
         roomName: "$roomData.name",
         bookingsCount: 1,
