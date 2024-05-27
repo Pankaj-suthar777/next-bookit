@@ -1,9 +1,12 @@
 "use client";
 
 import { IRoom } from "@/backend/models/room";
+import { useDeleteRoomMutation } from "@/redux/api/roomApi";
 import { MDBDataTable } from "mdbreact";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 
 interface Props {
   data: {
@@ -48,12 +51,15 @@ const AllRooms = ({ data }: Props) => {
               <i className="fa fa-pencil"></i>
             </Link>
             <Link
-              href={`/admin/rooms/${room._id}/uplload_images`}
+              href={`/admin/rooms/${room._id}/upload_images`}
               className="btn btn-outline-success ms-2"
             >
               <i className="fa fa-images"></i>
             </Link>
-            <button className="btn btn-outline-danger ms-2">
+            <button
+              className="btn btn-outline-danger ms-2"
+              onClick={() => deleteRoomHandler(room._id)}
+            >
               <i className="fa fa-trash"></i>
             </button>
           </>
@@ -62,6 +68,25 @@ const AllRooms = ({ data }: Props) => {
     });
 
     return data;
+  };
+
+  const router = useRouter();
+
+  const [deleteRoom, { error, isSuccess }] = useDeleteRoomMutation();
+
+  useEffect(() => {
+    if (error && "data" in error) {
+      toast.error(error?.data?.errMessage);
+    }
+
+    if (isSuccess) {
+      router.refresh();
+      toast.success("Images Uploaded");
+    }
+  }, [error, isSuccess]);
+
+  const deleteRoomHandler = (id: string) => {
+    deleteRoom(id);
   };
 
   return (

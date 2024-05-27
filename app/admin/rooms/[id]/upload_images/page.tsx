@@ -1,21 +1,20 @@
-import { getAuthHeader } from "@/helpers/authHeader";
-import UpdateRoom from "@/components/admin/UpdateRoom";
 import Error from "@/app/error";
+import UploadRoomImages from "@/components/admin/UploadRoomImages";
 
 export const metadata = {
-  title: "Update Rooms - ADMIN",
+  title: "Upload Room Images - ADMIN",
 };
 
 const getRoom = async (id: string) => {
-  const authHeaders = getAuthHeader();
-
   const res = await fetch(`${process.env.API_URL}/api/rooms/${id}`, {
-    headers: authHeaders.headers,
+    next: {
+      tags: ["RoomDetails"],
+    },
   });
   return res.json();
 };
 
-export default async function AdminUpdateRoomPage({
+export default async function AdminUploadRoomImagesPage({
   params,
 }: {
   params: {
@@ -27,5 +26,5 @@ export default async function AdminUpdateRoomPage({
   if (data?.errMessage) {
     return <Error error={data} />;
   }
-  return <UpdateRoom data={data} />;
+  return <UploadRoomImages data={data} />;
 }

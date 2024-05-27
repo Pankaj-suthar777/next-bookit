@@ -16,7 +16,7 @@ const RoomItem = ({ room }: Props) => {
           src={
             room.images.length > 0
               ? room.images[0].url
-              : "images/default_room_image.jpg"
+              : "/images/default_room_image.jpg"
           }
           alt={room?.name}
           height={170}
