@@ -6,7 +6,7 @@ const nextConfig = {
     NEXTAUTH_SECRET: "shcjbcha",
 
     SMTP_HOST: "sandbox.smtp.mailtrap.io",
-    SMTP_PORT: 2525,
+    SMTP_PORT: "2525",
     SMTP_USER: "fc2fa8293b82ad",
     SMTP_PASSWORD: "634f689de1d8fc",
     SMTP_FROM_EMAIL: "noreply@bookit.com",

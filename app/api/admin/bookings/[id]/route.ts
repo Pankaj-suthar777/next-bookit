@@ -19,6 +19,6 @@ dbConnect();
 
 router.use(isAuthenticatedUser, authorizeRoles("admin")).delete(deleteBooking);
 
-export async function DELETE(request: NextRequest, ctx: RequestContext) {
-  return router.run(request, ctx);
+export async function DELETE(requset: NextRequest, ctx: RequestContext) {
+  return router.run(requset, ctx);
 }

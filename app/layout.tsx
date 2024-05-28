@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+//import { Inter } from "next/font/google";
 import "./globals.css";
 import Head from "./head";
 import { GlobalProvider } from "./GlobalProvider";
@@ -8,7 +8,7 @@ import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+//const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,7 +24,9 @@ export default function RootLayout({
     <html lang="en">
       <Head />
 
-      <body className={inter.className}>
+      <body
+      // className={inter.className}
+      >
         <GlobalProvider>
           <Header />
           {children}
