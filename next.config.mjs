@@ -2,7 +2,7 @@
 const nextConfig = {
   env: {
     // DB_LOCAL_URL: "mongodb://127.0.0.1/bookit",
-    NEXTAUTH_URL: "http://localhost:3000",
+    NEXTAUTH_URL: "https://next-booknow.vercel.app",
     NEXTAUTH_SECRET: "shcjbcha",
 
     SMTP_HOST: "sandbox.smtp.mailtrap.io",
@@ -24,9 +24,9 @@ const nextConfig = {
       "pk_test_51OhvW7Gr7paNn0fxbC8fWbjyifJHhT5vKdT8IR2oz8X8bAbz0oiJaqHMg8B9bUjNaEwBffNgspnjAR0QlISGQPel00EN3uyBLK",
     STRIPE_API_SECRET:
       "sk_test_51OhvW7Gr7paNn0fxvVAsZIGBYQQRTp7jMvPHJ78uiwLtHR7xV0UNXkvMQo96zwBRKeb4FdS7pE9w544PBDXx8B6K00dRx0xf01",
-    STRIPE_WEBHOOK_SECRET: "",
+    STRIPE_WEBHOOK_SECRET: "whsec_MeXacnkY91wns2GOXZCjFZhpviZYDjcG",
 
-    API_URL: "http://localhost:3000",
+    API_URL: "https://next-booknow.vercel.app",
     DB_LOCAL_URL:
       "mongodb+srv://pankajss0070:c95TzV2zSHCWu6AF@cluster0.b784hfl.mongodb.net/bookNow?retryWrites=true&w=majority",
     DB_URL:
