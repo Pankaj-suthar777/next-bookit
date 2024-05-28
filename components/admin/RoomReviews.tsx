@@ -28,6 +28,7 @@ const RoomReviews = () => {
   useEffect(() => {
     if (error && "data" in error) {
       toast.error(error?.data?.errMessage);
+      console.log(error);
     }
 
     if (isSuccess) {
