@@ -81,7 +81,7 @@ const AllRooms = ({ data }: Props) => {
 
     if (isSuccess) {
       router.refresh();
-      toast.success("Images Uploaded");
+      toast.success("Room deleted");
     }
   }, [error, isSuccess]);
 
