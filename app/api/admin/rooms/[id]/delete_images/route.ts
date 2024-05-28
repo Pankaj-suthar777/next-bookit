@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createEdgeRouter } from "next-connect";
 import { deleteRoomImage } from "@/backend/controllers/roomController";
 import dbConnect from "@/backend/config/dbConfig";
@@ -18,6 +18,9 @@ dbConnect();
 
 router.use(isAuthenticatedUser, authorizeRoles("admin")).put(deleteRoomImage);
 
-export async function PUT(requset: NextRequest, ctx: RequestContext) {
-  return router.run(requset, ctx);
+export async function PUT(
+  requset: NextRequest,
+  ctx: RequestContext
+): Promise<NextResponse> {
+  return router.run(requset, ctx) as Promise<NextResponse>;
 }

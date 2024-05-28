@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createEdgeRouter } from "next-connect";
 import { createRoomReview } from "@/backend/controllers/roomController";
 import dbConnect from "@/backend/config/dbConfig";
@@ -11,7 +11,10 @@ dbConnect();
 
 router.use(isAuthenticatedUser).put(createRoomReview);
 
-export async function PUT(requset: NextRequest, ctx: RequestContext) {
+export async function PUT(
+  requset: NextRequest,
+  ctx: RequestContext
+): Promise<NextResponse> {
   dbConnect();
-  return router.run(requset, ctx);
+  return router.run(requset, ctx) as Promise<NextResponse>;
 }

@@ -3,7 +3,7 @@ import User, { IUser } from "@/backend/models/user";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 type Credentials = {
   email: string;
@@ -14,7 +14,7 @@ type Token = {
   user: IUser;
 };
 
-async function auth(req: NextRequest, res: any) {
+async function auth(req: NextRequest, res: any): Promise<NextResponse> {
   return await NextAuth(req, res, {
     session: {
       strategy: "jwt",

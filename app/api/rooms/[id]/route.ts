@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createEdgeRouter } from "next-connect";
 import { getRoomDetails } from "@/backend/controllers/roomController";
 import dbConnect from "@/backend/config/dbConfig";
@@ -14,7 +14,10 @@ dbConnect();
 
 router.get(getRoomDetails);
 
-export async function GET(requset: NextRequest, ctx: RequestContext) {
+export async function GET(
+  requset: NextRequest,
+  ctx: RequestContext
+): Promise<NextResponse> {
   dbConnect();
-  return router.run(requset, ctx);
+  return router.run(requset, ctx) as Promise<NextResponse>;
 }
