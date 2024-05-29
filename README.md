@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Features
 
-## Getting Started
+Custom Error Handling
+Implement robust error handling mechanisms to improve user experience and debugging efficiency.
 
-First, run the development server:
+Filters, Search, Pagination
+Add dynamic filters, search functionalities, and pagination to enhance data navigation and accessibility.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Data Fetching in Next.js
+Utilize Next.js's capabilities for efficient data fetching, ensuring optimal performance and seamless user experience.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Implementing Redux for State Management
+Integrate Redux to manage the application's state effectively, ensuring consistent data flow and state updates.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Pagination, Search on Frontend
+Implement frontend pagination and search features to allow users to navigate and find content effortlessly.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Authentication with next-auth
+Incorporate next-auth for user authentication, supporting multiple authentication providers and session management.
 
-## Learn More
+Protected Routes & User Handling
+Secure routes to protect sensitive pages and manage user access based on authentication status.
 
-To learn more about Next.js, take a look at the following resources:
+Handle Room Bookings
+Develop features to handle room bookings, including booking creation, viewing, and management.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Adding Stripe for Payments
+Integrate Stripe to manage payments, providing a secure and reliable payment processing system.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Handle Room Reviews
+Implement functionality for users to add, view, and manage room reviews, enhancing user feedback and interaction.
 
-## Deploy on Vercel
+Admin Routes 
+Develop dedicated admin routes for managing the application, including user management, room management, and more.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Admin Booking Sales Charts
+Enable admins to view booking sales charts, providing insights into booking trends and sales performance.
