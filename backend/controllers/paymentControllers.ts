@@ -18,6 +18,7 @@ export const stripeCheckoutSession = catchAsyncErrors(
 
     // Get room details
     const room = await Room.findById(params.id);
+    console.log("success_url:" + `${process.env.API_URL}/bookings/me`);
 
     // create stripe checkout session
     const session = await stripe.checkout.sessions.create({
@@ -64,8 +65,9 @@ export const webhookCheckout = async (req: NextRequest) => {
       const session = event.data.object;
 
       const room = session.client_reference_id;
-      const user = (await User.findOne({ email: session?.customer_email }))._id;
-      const amountPaid = session?.amountPaid / 100;
+      const user = (await User.findOne({ email: session?.customer_email })).id;
+
+      const amountPaid = session?.amount_total / 100;
 
       const paymentInfo = {
         id: session.payment_intent,
@@ -90,7 +92,7 @@ export const webhookCheckout = async (req: NextRequest) => {
       return NextResponse.json({ success: true });
     }
   } catch (error: any) {
-    console.log("Error in strpe in checkout webhook", error);
+    console.log("Eror in stripe checkout webhook => ", error);
     return NextResponse.json({ errMessage: error?.message });
   }
 };

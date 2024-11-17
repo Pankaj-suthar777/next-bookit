@@ -68,17 +68,18 @@ const BookingDatePicker = ({ room }: Props) => {
     }
   }, [error, isSuccess]);
 
-  const bookRoom = async () => {
+  const bookRoom = () => {
     const amount = room.pricePerNight * daysOfStay;
+
     const checkoutData = {
-      checkInDate: checkInDate?.toISOString(),
-      checkOutDate: checkOutDate?.toISOString(),
+      checkInDate: checkInDate.toISOString(),
+      checkOutDate: checkOutDate.toISOString(),
       daysOfStay,
       amount,
     };
+
     stripeCheckout({ id: room?._id, checkoutData });
   };
-
   // const bookRoom = async () => {
   //   const bookingData = {
   //     room: room?._id,
