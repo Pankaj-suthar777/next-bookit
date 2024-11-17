@@ -12,7 +12,6 @@ interface Props {
 
 const MyBooking = ({ data }: Props) => {
   const bookings = data.bookings;
-
   const setBookings = () => {
     const data: { columns: any[]; rows: any[] } = {
       columns: [
@@ -45,7 +44,10 @@ const MyBooking = ({ data }: Props) => {
       rows: [],
     };
 
-    bookings?.forEach((booking) => {
+    // Reverse the bookings array
+    const reversedBookings = [...bookings].reverse();
+
+    reversedBookings?.forEach((booking) => {
       data?.rows?.push({
         id: booking._id,
         checkin: new Date(booking?.checkInDate).toLocaleString("en-US"),

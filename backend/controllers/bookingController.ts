@@ -90,7 +90,9 @@ export const getRoomBookedDates = catchAsyncErrors(async (req: NextRequest) => {
 
 // Get current user bookings   =>  /api/bookings/me
 export const myBookings = catchAsyncErrors(async (req: NextRequest) => {
-  const bookings = await Booking.find({ user: req.user._id });
+  const bookings = await Booking.find({ user: req.user._id }).sort({
+    createdAt: 1,
+  });
 
   return NextResponse.json({
     bookings,
