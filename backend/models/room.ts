@@ -28,7 +28,7 @@ export interface IRoom extends Document {
   description: string;
   pricePerNight: number;
   address: string;
-  location: ILocation;
+  location?: ILocation;
   guestCapacity: number;
   numOfBeds: number;
   isInternet: boolean;
@@ -41,7 +41,7 @@ export interface IRoom extends Document {
   images: IImage[];
   category: string;
   reviews: IReview[];
-  user: IUser;
+  user?: IUser;
   createdAt: Date;
 }
 
